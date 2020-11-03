@@ -25,7 +25,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $user -> name }}</td>
-                                <td>{{ $user-> department }}</td>
+                                <td>{{ $user-> department->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>
                                 <td>

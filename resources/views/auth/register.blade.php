@@ -6,9 +6,6 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
-
-{{--                {{ $name }}--}}
-{{--                {{                 dd($user->department) }}--}}
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
@@ -27,11 +24,18 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('department') }}</label>
+                            <label for="department_id" class="col-md-4 col-form-label text-md-right">{{ __('department_id') }}</label>
 
                             <div class="col-md-6">
 {{--                                <input id="department" type="text" class="form-control @error('department') is-invalid @enderror" name="department" value="{{ old('department') }}" required autocomplete="department" autofocus>--}}
-                                <input type="text" class="form-control" name="department">
+{{--                                <input type="text" class="form-control" name="department_id">--}}
+
+                                <select name="department_id"  class="form-control">
+                                    @foreach($departments as   $key => $department)
+                                        <option value="{{ $key }}">{{ $department }}</option>
+                                    @endforeach
+                                </select>
+
                                 @error('department')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

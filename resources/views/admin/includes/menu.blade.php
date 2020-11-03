@@ -9,11 +9,11 @@
                 <a href="#"><i class="fa fa-comments-o fa-fw"></i> Feedback<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#"><i class="fa fa-question-circle fa-fw"></i> Make Question</a>
+                        <a href="{{ route('admin.questions') }}"><i class="fa fa-question-circle fa-fw"></i> Make Question</a>
 
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-comments" aria-hidden="true"></i> Show Feedback</a>
+                        <a href="{{ route('admin.index.feedback') }}"><i class="fa fa-comments" aria-hidden="true"></i> Show Feedback</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

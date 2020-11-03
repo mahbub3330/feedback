@@ -25,7 +25,7 @@
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
 {{--                {{ config('app.name', 'Laravel') }}--}}
-                {{ Auth::User()->department }}
+                {{ Auth::User()->department->name }}
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -75,6 +75,39 @@
 
     <main class="py-4">
         @yield('content')
+        <div class="container-fluid">
+           @if(count($questions) && count($department_users))
+           <div class="form-group row">
+               <form action="{{ route('employee.store.feedback') }}" method="post">
+                            @csrf
+                         @php($i=1)
+                   <input type="number" hidden name="feedback_by" value="{{ Auth::user()->id }}" >
+                   @foreach($questions as $questionsKey => $question)
+{{--                  {{ dd($keys) }}--}}
+                        <div class="col-md-12">
+                            <label for="name" name="question_id" class="col-md-12 col-form-label" value="{{ $questionsKey }}">{{ $questionsKey }}.{{ $question }}</label>
+                        </div>
+                                   @foreach($department_users as $key => $user)
+
+                                  <div class="col-md-12">
+                                      <div class="form-check" class="col-md-6">
+                                          <input class="form-check-input" type="radio" name="feedback_to[{{ $questionsKey }}]" id="{{$questionsKey}}" value="{{ $key }}" >
+                                          <label class="form-check-label" for="{{ $questionsKey }}">
+                                             {{ $user  }} {{ $key }}
+                                          </label>
+                                      </div>
+                                  </div>
+                                @endforeach
+                       @endforeach
+                   <button type="submit">save</button>
+               </form>
+          </div>
+               @else
+                   no review today
+            @endif
+
+
+        </div>
     </main>
 </div>
 </body>

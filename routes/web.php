@@ -1,5 +1,7 @@
 <?php
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Employee\FeedbackFormController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,10 +24,23 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
 
     Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard');
 
+    //questions section
+    Route::get('questions',[QuestionController::class,'index'])->name('questions');
+    Route::get('questions/create',[QuestionController::class,'createQuestion'])->name('create.questions');
+    Route::post('questions',[QuestionController::class,'storeQuestion'])->name('store.questions');
+    Route::get('questions/{question}',[QuestionController::class,'showReview'])->name('show.review');
+
+
+    //feedback section
+    Route::get('show/feedback',[FeedbackController::class,'index'])->name('index.feedback');
+
+
+
 });
 
 Route::group(['as'=>'employee.','prefix'=>'employee','namespace'=>'Employee','middleware'=>['auth','employee']],function (){
     Route::get('dashboard',[FeedbackFormController::class,'index'])->name('dashboard');
+    Route::post('dashboard',[FeedbackFormController::class,'storeFeedback'])->name('store.feedback');
 
 });
 
