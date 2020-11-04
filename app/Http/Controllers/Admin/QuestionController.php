@@ -14,7 +14,6 @@ class QuestionController extends Controller
 {
     //
     public function index()
-
     {
         $questions = Question::all()->sortByDesc('id');
 //        return $questions;
@@ -37,7 +36,6 @@ class QuestionController extends Controller
         $questions->department_id = $request->department_id;
         $questions->save();
 
-//        return 'secess';
         return redirect()->route('admin.questions');
     }
 
@@ -47,18 +45,31 @@ class QuestionController extends Controller
         $users = Feedback::With('feedbackToUser','feedbackByUser')
                            ->where('question_id',$question->id)
                            ->get();
-//        $top = $users->groupBy('feedback_to')->max()->first();
-        try {
-            // Validate the value...
-            $top = $users->groupBy('feedback_to')->max()->first();
+        $top = $users->groupBy('feedback_to')->max();
+
+        if(!$top){
             return view('admin.feedback.showreview',compact('users','top'));
 
+        }else{
+            $top = $top->first();
+            return view('admin.feedback.showreview',compact('users','top'));
 
-        } catch (Throwable $e) {
-            report($e);
-
-            return redirect()->back()->with('message','No data for this question');
         }
+
+
+    }
+
+//        try {
+            // Validate the value...
+//            $top = $users->groupBy('feedback_to')->max()->first();
+//            return view('admin.feedback.showreview',compact('users','top'));
+
+
+//        } catch (Throwable $e) {
+//            report($e);
+//
+//            return redirect()->back()->with('message','No data for this question');
+//        }
 //        return $top;
 //        if(!$top){
 //
@@ -83,7 +94,7 @@ class QuestionController extends Controller
 //                        ->get();
 //        return $top;
 //        $top = $results->;
-    }
+//    }
 
     public function delete(Question $question)
     {

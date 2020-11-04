@@ -13,7 +13,6 @@ class EmployeeController extends Controller
     public function index()
     {
         $users = User::where('id', '!=', Auth::id())->get();
-//        return $users;
         return view('admin.employee.index',compact('users'));
     }
     public function show(User $employee)

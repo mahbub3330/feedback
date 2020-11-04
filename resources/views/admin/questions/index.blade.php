@@ -26,7 +26,7 @@
                         <tr>
                             <td>{{ $i++ }}</td>
                             <td><a href="{{ route('admin.show.review',['question'=> $question->id ]) }}">{{ $question->question_name }}</a>
-                            
+
                             </td>
                             <td>{{ $question->department->name }}</td>
                             <td>

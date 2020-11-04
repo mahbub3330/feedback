@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QuestionController;
+use App\Http\Controllers\QuestionAutoUpdateDeleteController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Employee\FeedbackFormController;
@@ -64,3 +65,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/review',[QuestionAutoUpdateDeleteController::class,'index']);
