@@ -85,7 +85,7 @@
                    @foreach($questions as $questionsKey => $question)
 {{--                  {{ dd($keys) }}--}}
                         <div class="col-md-12">
-                            <label for="name" name="question_id" class="col-md-12 col-form-label" value="{{ $questionsKey }}">{{ $questionsKey }}.{{ $question }}</label>
+                            <label for="name" name="question_id" class="col-md-12 col-form-label" value="{{ $questionsKey }}">{{ $i++ }}.{{ $question }}</label>
                         </div>
                                    @foreach($department_users as $key => $user)
 
@@ -93,7 +93,7 @@
                                       <div class="form-check" class="col-md-6">
                                           <input class="form-check-input" type="radio" name="feedback_to[{{ $questionsKey }}]" id="{{$questionsKey}}" value="{{ $key }}" >
                                           <label class="form-check-label" for="{{ $questionsKey }}">
-                                             {{ $user  }} {{ $key }}
+                                             {{ $user  }}
                                           </label>
                                       </div>
                                   </div>

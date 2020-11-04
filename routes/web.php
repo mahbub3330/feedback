@@ -2,6 +2,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\FeedbackController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Employee\FeedbackFormController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,12 +28,24 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     //questions section
     Route::get('questions',[QuestionController::class,'index'])->name('questions');
     Route::get('questions/create',[QuestionController::class,'createQuestion'])->name('create.questions');
+    Route::DELETE('questions/{question}',[QuestionController::class,'delete'])->name('delete.questions');
+
+    //show review per question
     Route::post('questions',[QuestionController::class,'storeQuestion'])->name('store.questions');
     Route::get('questions/{question}',[QuestionController::class,'showReview'])->name('show.review');
 
 
     //feedback section
     Route::get('show/feedback',[FeedbackController::class,'index'])->name('index.feedback');
+
+
+    //employee section
+    Route::get('employee',[EmployeeController::class,'index'])->name('employee.index');
+    Route::get('employee/{employee}',[EmployeeController::class,'show'])->name('employee.show');
+    Route::get('employee/{employee}/edit',[EmployeeController::class,'edit'])->name('employee.edit');
+    Route::patch('employee/{employee}',[EmployeeController::class,'update'])->name('employee.update');
+
+    Route::DELETE('employee/{employee}',[EmployeeController::class,'delete'])->name('employee.delete');
 
 
 

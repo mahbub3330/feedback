@@ -25,14 +25,24 @@
                         @foreach($questions as $question)
                         <tr>
                             <td>{{ $i++ }}</td>
-                            <td><a href="{{ route('admin.show.review',['question'=> $question->id ]) }}">{{ $question->question_name }}</a></td>
-                            <td>{{ $question->department_id }}</td>
+                            <td><a href="{{ route('admin.show.review',['question'=> $question->id ]) }}">{{ $question->question_name }}</a>
+                            
+                            </td>
+                            <td>{{ $question->department->name }}</td>
                             <td>
-                                Demo
+                                <form action="{{ route('admin.delete.questions',['question'=> $question->id ]) }}" method="post">
+                                    @method('DELETE')
+                                    @csrf
+                                    {{--                     <input type="submit" value="delete">--}}
+                                    <button type="submit" class=""><span class="glyphicon glyphicon-trash"></span></button>
+                                </form>
                             </td>
                         </tr>
+
                         @endforeach
+
                     </table>
+
                 </div>
 
             </div>

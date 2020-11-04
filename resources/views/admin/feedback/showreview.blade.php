@@ -12,6 +12,7 @@
                 </div>
 
                 {{--                <a href="#">Add Question</a>--}}
+{{--                {{ dd($users) }}--}}
                 <div class="panel-body">
                     <h3 class="text-center text-success">{{ Session::get('message') }}</h3>
                     <table class="table table-bordered ">
@@ -26,14 +27,31 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{ $user->question->question_name }}</td>
-                                    <td>{{ $user->feedbackByUser->name }}</td>
-                                    <td>{{ $user->feedbackToUser->name }}</td>
+                                    <td>{{ $user->question->question_name ?? ''}}</td>
+                                    <td>{{ $user->feedbackByUser->name ?? ''}}</td>
+                                    <td>{{ $user->feedbackToUser->name ?? '' }}</td>
                                 </tr>
                             @endforeach
                         @endif
+                        <tr class="bg-info">
+                            <td colspan="3">Top feedback TO</td>
+                            <td colspan="2">{{ $top->feedbackToUser->name ?? '' }}</td>
+                        </tr>
                     </table>
+
                 </div>
+
+
+
+{{--                --}}
+{{--                @foreach($results as $result)--}}
+{{--                    <td>{{ $result->feedbackToUser->name }}</td>--}}
+{{--                @endforeach--}}
+{{--                {{ dd($user->feedbackToUser->name -> groupBy('name')) }}--}}
+{{--                @foreach($top as $tops)--}}
+{{--                {{ ($top->id) }}--}}
+{{--                @endforeach--}}
+
 
             </div>
 

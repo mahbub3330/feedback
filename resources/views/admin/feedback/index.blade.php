@@ -12,6 +12,7 @@
                 </div>
 
                 {{--                <a href="#">Add Question</a>--}}
+                @if($users->count())
                 <div class="panel-body">
                     <h3 class="text-center text-success">{{ Session::get('message') }}</h3>
                     <table class="table table-bordered ">
@@ -26,14 +27,18 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{$i++}}</td>
-                                    <td>{{ $user->question->question_name }}</td>
-                                    <td>{{ $user->feedbackByUser->name }}</td>
-                                    <td>{{ $user->feedbackToUser->name }}</td>
+                                    <td>{{ $user->question->question_name ?? 'N/A' }}
+                                    </td>
+                                    <td>{{ $user->feedbackByUser->name ?? 'N/A' }}</td>
+                                    <td>{{ $user->feedbackToUser->name ?? 'N/A' }}</td>
                                 </tr>
                             @endforeach
                         @endif
                     </table>
                 </div>
+                @else
+                    <h4>No data available</h4>
+                @endif
 
             </div>
 

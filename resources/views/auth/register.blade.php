@@ -24,14 +24,15 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="department_id" class="col-md-4 col-form-label text-md-right">{{ __('department_id') }}</label>
+                            <label for="department_id" class="col-md-4 col-form-label text-md-right">{{ __('Department') }}</label>
 
                             <div class="col-md-6">
 {{--                                <input id="department" type="text" class="form-control @error('department') is-invalid @enderror" name="department" value="{{ old('department') }}" required autocomplete="department" autofocus>--}}
 {{--                                <input type="text" class="form-control" name="department_id">--}}
 
                                 <select name="department_id"  class="form-control">
-                                    @foreach($departments as   $key => $department)
+
+                                @foreach($departments as   $key => $department)
                                         <option value="{{ $key }}">{{ $department }}</option>
                                     @endforeach
                                 </select>

@@ -19,13 +19,5 @@ class Department extends Model
         return $this->hasMany('questions');
     }
 
-    public function feedbackBy()
-    {
-        return $this->belongsTo('App\Models\User','feedback_by','id');
-    }
-//
-//    public function feedbackTo()
-//    {
-//        return $this->belongsTo('App\Models\User','feedback_to','id');
-//    }
+
 }

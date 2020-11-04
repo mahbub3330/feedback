@@ -23,7 +23,7 @@
                 <a href="#"><i class="fa fa-users" aria-hidden="true"></i> Employee<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#"><i class="fa fa-table fa-fw"></i> Manage Employee</a>
+                        <a href="{{ route('admin.employee.index') }}"><i class="fa fa-table fa-fw"></i> Manage Employee</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
