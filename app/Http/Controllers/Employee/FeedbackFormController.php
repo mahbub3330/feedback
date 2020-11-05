@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Node\Stmt\Return_;
 
 class FeedbackFormController extends Controller
 {
@@ -27,7 +28,7 @@ class FeedbackFormController extends Controller
         $department_users = $users->where('id', '!=', $user_id)->pluck('name', 'id');
         $questions = Question::where('department_id', $department_id)
             ->whereNotIn('id',$answerquestions)
-//            ->whereDate('created_at',Carbon::today())
+            ->whereDate('created_at',Carbon::today())
             ->pluck('question_name', 'id');
 //        return $questions;
 
@@ -41,23 +42,26 @@ class FeedbackFormController extends Controller
     public function storeFeedback(Request $request)
 
     {
+        if ($request->feedback_to){
 
+            foreach ($request['feedback_to'] as $key => $value ){
+                $saveFeedback = new Feedback();
 
-        foreach ($request['feedback_to'] as $key => $value ){
+                $saveFeedback->question_id = $key;
+                $saveFeedback->feedback_by = $request->feedback_by;
+                $saveFeedback->feedback_to = $value;
 
-            $saveFeedback = new Feedback();
+                $saveFeedback->save();
 
-            $saveFeedback->question_id = $key;
-            $saveFeedback->feedback_by = $request->feedback_by;
-            $saveFeedback->feedback_to = $value;
+            }
 
-            $saveFeedback->save();
-
+            return redirect()->back();
+        }else{
+            return redirect()->back();
         }
 
-        return redirect()->back();
 
-
-//        return 'success';
     }
+
+
 }

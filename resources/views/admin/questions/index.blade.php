@@ -19,6 +19,7 @@
                             <th>Sl No</th>
                             <th>Question Name</th>
                             <th>options</th>
+                            <th>created at</th>
                             <th>Action</th>
                         </tr>
                        @php($i=1)
@@ -29,6 +30,7 @@
 
                             </td>
                             <td>{{ $question->department->name }}</td>
+                            <td>{{ $question->created_at->toFormattedDateString() }}</td>
                             <td>
                                 <form action="{{ route('admin.delete.questions',['question'=> $question->id ]) }}" method="post">
                                     @method('DELETE')

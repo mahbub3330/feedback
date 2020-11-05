@@ -15,6 +15,9 @@
                     <li>
                         <a href="{{ route('admin.index.feedback') }}"><i class="fa fa-comments" aria-hidden="true"></i> Show Feedback</a>
                     </li>
+                    <li>
+                        <a href="{{ route('admin.show.topfeedback') }}"><i class="fa fa-comments" aria-hidden="true"></i> Top Feedback</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

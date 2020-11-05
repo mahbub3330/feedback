@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Department;
 use App\Models\Feedback;
 use App\Models\Question;
+use App\Models\TopFeedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
@@ -42,17 +43,29 @@ class QuestionController extends Controller
     public function showReview(Question $question)
     {
 
+        $questions = TopFeedback::Where('question_id',$question->id)->get();
+
+
         $users = Feedback::With('feedbackToUser','feedbackByUser')
                            ->where('question_id',$question->id)
                            ->get();
-        $top = $users->groupBy('feedback_to')->max();
+
+
+        if ($users){
+            $top = $users->groupBy('feedback_to')->max();
+        }else{
+            $top = $users->groupBy('feedback_to')->max()->unique('feedback_to');
+
+        }
+
 
         if(!$top){
-            return view('admin.feedback.showreview',compact('users','top'));
+//            $top = 'na';
+            return view('admin.feedback.showreview',compact('users','top','questions'));
 
         }else{
             $top = $top->first();
-            return view('admin.feedback.showreview',compact('users','top'));
+            return view('admin.feedback.showreview',compact('users','top','questions'));
 
         }
 
@@ -100,7 +113,6 @@ class QuestionController extends Controller
     {
         $question->delete();
 
-//        return 'success';
 
         return redirect()->back();
     }

@@ -2,6 +2,7 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\QuestionAutoUpdateDeleteController;
+use App\Http\Controllers\TopFeedbackController;
 use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Employee\FeedbackFormController;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'=>['auth','admin']],function (){
@@ -39,6 +40,12 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
     //feedback section
     Route::get('show/feedback',[FeedbackController::class,'index'])->name('index.feedback');
 
+    //top feedback section
+    Route::get('topfeedback',[TopFeedbackController::class,'show'])->name('show.topfeedback');
+    Route::post('/savetopfeedback',[TopFeedbackController::class,'store'])->name('store.topfeedback');
+
+
+
 
     //employee section
     Route::get('employee',[EmployeeController::class,'index'])->name('employee.index');
@@ -52,11 +59,26 @@ Route::group(['as'=>'admin.','prefix'=>'admin','namespace'=>'Admin','middleware'
 
 });
 
+
 Route::group(['as'=>'employee.','prefix'=>'employee','namespace'=>'Employee','middleware'=>['auth','employee']],function (){
+    //route group for employee who can just give a feedback
     Route::get('dashboard',[FeedbackFormController::class,'index'])->name('dashboard');
     Route::post('dashboard',[FeedbackFormController::class,'storeFeedback'])->name('store.feedback');
 
 });
+
+//feedback front end route
+
+Route::get('/feedback',[TopFeedbackController::class,'index'])->name('feedback.home');
+//end of feedback front-end dashboard
+
+//feedback automation practice
+Route::get('/review',[QuestionAutoUpdateDeleteController::class,'index']);
+
+
+
+
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -65,5 +87,3 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/review',[QuestionAutoUpdateDeleteController::class,'index']);

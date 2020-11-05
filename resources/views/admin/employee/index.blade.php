@@ -7,6 +7,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="text-center text-success">Manage Employee </h4>
+{{--                    <a href="{{ route('register') }}">Add Employee</a>--}}
                 </div>
 
                 <div class="panel-body">

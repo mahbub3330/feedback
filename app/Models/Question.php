@@ -25,6 +25,11 @@ class Question extends Model
         return $this->hasMany('App\Model\Feedback');
     }
 
+    public function topfeedback()
+    {
+        return $this->hasOne('App\Models\TopFeedback');
+    }
+
 //    public function feedbackBy()
 //    {
 //        return $this->belongsTo('App\Models\Department', 'feedback_by', 'id')->withDefault();
